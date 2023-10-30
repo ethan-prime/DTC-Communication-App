@@ -1,0 +1,73 @@
+body {
+    font-size: 20px;
+}
+
+/*#hello {
+    background-image: url(https://cdn5.vectorstock.com/i/1000x1000/90/39/waving-hello-emoticon-vector-6769039.jpg);
+}
+
+#yes {
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Eo_circle_green_checkmark.svg/1200px-Eo_circle_green_checkmark.svg.png);
+}
+
+#no {
+    background-image: url(https://png.pngtree.com/png-clipart/20211009/original/pngtree-red-close-icon-png-image_6839488.png);
+}*/
+
+body {
+    background-color:#99b4ff;
+background-image:
+radial-gradient(at 28% 87%, hsla(160,72%,46%,0.77) 0px, transparent 50%),
+radial-gradient(at 71% 50%, hsla(298,82%,64%,1) 0px, transparent 50%),
+radial-gradient(at 56% 78%, hsla(241,96%,74%,1) 0px, transparent 50%),
+radial-gradient(at 44% 74%, hsla(266,94%,76%,1) 0px, transparent 50%),
+radial-gradient(at 61% 95%, hsla(229,67%,68%,1) 0px, transparent 50%),
+radial-gradient(at 9% 20%, hsla(315,92%,71%,1) 0px, transparent 50%),
+radial-gradient(at 15% 11%, hsla(157,81%,61%,1) 0px, transparent 50%);
+}
+
+.table-btn {
+    text-align: center;
+    width: 100px;
+    height: 100px;
+}
+
+#board {
+    margin: auto;
+    width: 85%;
+    height: 85%;
+    background-color: transparent;
+}
+
+.main {
+    margin: auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 25px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.comm-btn {
+    background-color: white;
+    width: 90%;
+    height: 90%;
+    border-radius: 25px;
+    border: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.comm-btn:hover {
+    background-color: #99b4ff;
+    transition: 0.7s;
+}
+
+.comm-btn:active {
+    transition:cubic-bezier(1, 0, 0, 1);
+    background-color: black;
+    color: white;
+}
