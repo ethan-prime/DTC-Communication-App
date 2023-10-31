@@ -51,6 +51,8 @@ h1 {
 
 .comm-btn {
     background-color: white;
+    color: black;
+    text-shadow: 1px 1px 2.5px white;
     width: 90%;
     height: 90%;
     border-radius: 25px;

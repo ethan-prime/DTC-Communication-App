@@ -34,7 +34,6 @@ function createTable(m, n) {
 
 function addButtons(buttonList, m, n) {  //buttonList = ["hello", "yes", "no", etc...]
     for (let i = 0; i < buttonList.length && i < m*n; i++) {
-        console.log(buttonList[i]);
         word = buttonList[i].toLowerCase().replaceAll(' ','').replaceAll(',','').replaceAll("'",'');
         let btn = document.createElement("input");
         btn.setAttribute("type", "button");
@@ -45,16 +44,33 @@ function addButtons(buttonList, m, n) {  //buttonList = ["hello", "yes", "no", e
         col = i % n;
         // we assume that a button table has already been created !
         let elem = document.getElementById("item-"+row+"."+col);
-        console.log(elem);
+        //console.log(elem);
         elem.appendChild(btn);
     }
     for (let i = 0; i < buttonList.length; i++) {
-        console.log(word);
+        //console.log(word);
         word = buttonList[i].toLowerCase().replaceAll(' ','').replaceAll(',','').replaceAll("'",'');
-        document.getElementById(word).setAttribute("onclick", "playSound('"+word+"');");
+        try {
+            document.getElementById(word).setAttribute("onclick", "playSound('"+word+"');");
+        } catch {
+            console.log("Error connecting a button to a sound file.");
+        }
     }
 }
 
+function addImages(words) {
+    console.log('balls');
+    for (let i = 0; i < words.length; i++) {
+        let word = words[i].toLowerCase().replaceAll(' ','').replaceAll(',','').replaceAll("'",'');
+        console.log(word);
+        try {
+            document.getElementById(word).style.backgroundImage = `url(static/images/${word}.png)`;
+            document.getElementById(word).style.backgroundPosition = "center";
+        } catch {
+            console.log("Error connecting a button to an image file.");
+        }   
+    }
+}
 //let btns = document.getElementsByClassName('comm-btn');
 //for(let i = 0; i < btns.length; i++) {
 //   buttons.push(new Button(text=btns[i].id, sound=btns[i].id, image_url=btns[i].style.backgroundImage));
@@ -66,7 +82,7 @@ function addButtons(buttonList, m, n) {  //buttonList = ["hello", "yes", "no", e
 window.onload = () => {
     let link = window.location.href;
     link = link.split('/');
-    console.log(link);
+    //console.log(link);
     link =  link[link.length-1]
     let m = link.split('+')[0];
     let n = link.split('+')[1];
@@ -76,4 +92,5 @@ window.onload = () => {
     }
     createTable(m,n);
     addButtons(starting_words, m, n);
+    addImages(starting_words);
 }
