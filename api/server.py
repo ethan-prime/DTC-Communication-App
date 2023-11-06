@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 API_KEY = ""
 
-starting_words = ["hello","I","you","please","thanks","happy","sad","angry","tired","bathroom","food","drink","music","walk","store","computer","yes","no","help","i dont know"]
+starting_words = ["hello","you","please","thanks","happy","sad","angry","tired","bathroom","food","drink","music","walk","store","computer","yes","no","help","i dont know"]
 
 @app.route('/')
 @app.route('/<m>+<n>')
