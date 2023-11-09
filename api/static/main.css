@@ -24,6 +24,11 @@ radial-gradient(at 44% 74%, hsla(266,94%,76%,1) 0px, transparent 50%),
 radial-gradient(at 61% 95%, hsla(229,67%,68%,1) 0px, transparent 50%),
 radial-gradient(at 9% 20%, hsla(315,92%,71%,1) 0px, transparent 50%),
 radial-gradient(at 15% 11%, hsla(157,81%,61%,1) 0px, transparent 50%);
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .table-btn {
