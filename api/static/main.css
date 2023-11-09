@@ -29,6 +29,7 @@ radial-gradient(at 15% 11%, hsla(157,81%,61%,1) 0px, transparent 50%);
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    overflow: hidden;
 }
 
 .table-btn {
