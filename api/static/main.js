@@ -51,7 +51,7 @@ function addButtons(buttonList, m, n) {  //buttonList = ["hello", "yes", "no", e
         //console.log(word);
         word = buttonList[i].toLowerCase().replaceAll(' ','').replaceAll(',','').replaceAll("'",'');
         try {
-            document.getElementById(word).setAttribute("onclick", "playSound('"+word+"');");
+            document.getElementById(word).setAttribute("onmousedown", "playSound('"+word+"');");
         } catch {
             console.log("Error connecting a button to a sound file.");
         }
