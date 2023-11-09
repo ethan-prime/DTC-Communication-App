@@ -36,3 +36,5 @@ def download_sounds(words):
 
 if __name__ == '__main__':
     app.run()
+
+#ENCODE PROFILE DATA VIA URL!!!!!

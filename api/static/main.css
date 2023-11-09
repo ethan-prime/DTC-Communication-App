@@ -36,6 +36,7 @@ radial-gradient(at 15% 11%, hsla(157,81%,61%,1) 0px, transparent 50%);
     text-align: center;
     width: 100px;
     height: 100px;
+    max-width: 100px;
 }
 
 #board {
@@ -57,15 +58,15 @@ h1 {
 
 .comm-btn {
     background-color: white;
-    color: black;
-    text-shadow: 1px 1px 2.5px white;
+    color: rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px 5px white;
     width: 90%;
     height: 90%;
     border-radius: 25px;
     border: none;
     background-size: contain;
     background-repeat: no-repeat;
-    font-size: 15px;
+    font-size: 40px;
     transition: 0.3s;
 }
 
