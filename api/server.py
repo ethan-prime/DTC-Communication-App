@@ -10,8 +10,8 @@ API_KEY = ""
 starting_words = ["hello","you","please","thanks","happy","sad","angry","tired","bathroom","food","drink","music","walk","store","computer","yes","no","help","i dont know"]
 
 @app.route('/')
-@app.route('/<m>+<n>')
-def home(m=5,n=5):
+@app.route('/<url_params>')
+def home(url_params=""):
     return render_template('main.html')
 
 def download_sounds(words):

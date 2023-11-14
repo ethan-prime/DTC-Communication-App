@@ -7,6 +7,9 @@ class Button {
     }
 }
 
+let page = 1;
+let m, n, page_buttons;
+const LAST_PAGE = 5;
 let buttons = [];
 //let starting_words = ["hello","I","you","please","thanks","happy","sad","angry","tired","bathroom","food","drink","music","walk","store","computer","yes","no","help","i dont know"]; 
 let starting_words = ["hello","you", "please", "thanks", "happy", "sad", "angry", "tired", "bathroom", "food", "drink", "music", "walk", "store", "computer", "yes", "no", "help", "i dont know",     "more", "stop", "go", "want", "don't want", "hurt", "okay", "not okay", "hungry", "thirsty", "cold", "hot", "good", "bad", "comfortable", "uncomfortable", "love", "outside", "inside", "sleep",    "morning", "night", "friend", "family", "work", "school", "quiet", "loud", "fast", "slow", "now", "later", "today", "tomorrow", "clothes", "shoes", "medicine", "allergy", "doctor", "emergency",    "feel", "hear", "see", "touch", "taste", "sorry", "wait", "watch", "listen", "read", "phone", "home", "away", "come", "stay", "leave", "up", "down", "big", "small", "finish", "start", "yes", "no","maybe", "never", "always", "sometimes"]
@@ -53,21 +56,20 @@ function addButtons(buttonList, m, n) {  //buttonList = ["hello", "yes", "no", e
         try {
             document.getElementById(word).setAttribute("onmousedown", "playSound('"+word+"');");
         } catch {
-            console.log("Error connecting a button to a sound file.");
+            //console.log("Error connecting a button to a sound file.");
         }
     }
 }
 
 function addImages(words) {
-    console.log('balls');
     for (let i = 0; i < words.length; i++) {
         let word = words[i].toLowerCase().replaceAll(' ','').replaceAll(',','').replaceAll("'",'');
-        console.log(word);
+        //console.log(word);
         try {
             document.getElementById(word).style.backgroundImage = `url(static/images/${word}.png)`;
             document.getElementById(word).style.backgroundPosition = "center";
         } catch {
-            console.log("Error connecting a button to an image file.");
+            //console.log("Error connecting a button to an image file.");
         }   
     }
 }
@@ -83,14 +85,69 @@ window.onload = () => {
     let link = window.location.href;
     link = link.split('/');
     //console.log(link);
-    link =  link[link.length-1]
-    let m = link.split('+')[0];
-    let n = link.split('+')[1];
+    link = link[link.length-1]
+    console.log(link);
+    m = link.split('+')[0];
+    n = link.split('+')[1];
     if (m == null || m == 0 || n == null || n == 0) {
         m = 5;
         n = 5;
     }
+    page_buttons = link.split('+').slice(2);
+    console.log(page_buttons);
+    page_buttons = page_buttons.map(x=>x.split('-'));
+    console.log(page_buttons);
     createTable(m,n);
-    addButtons(starting_words, m, n);
-    addImages(starting_words);
+    if (page_buttons[0] == undefined) {
+        addButtons(starting_words, m, n);
+        addImages(starting_words);
+    }
+    addButtons(page_buttons[0],m,n);
+    addImages(page_buttons[0]);
+}
+
+function pageBack() {
+    if(page == 1) {
+        page = LAST_PAGE;
+    } else {
+        page--;
+    }
+    if(page_buttons[page-1] == undefined || page_buttons[page-1] == null) {
+        m, n = parseInt(m), parseInt(n);
+        createTable(m,n)
+        addButtons(starting_words);
+        addImages(starting_words);
+    }
+    document.getElementById('board').remove();
+    m, n = parseInt(m), parseInt(n);
+    createTable(m,n);
+    console.log(page_buttons[page-1],m,n);
+    addButtons(page_buttons[page-1],m,n);
+    addImages(page_buttons[page-1]);
+    updatePage(page);
+}
+
+function pageForward() {
+    if(page == LAST_PAGE) {
+        page = 1;
+    } else {
+        page++;
+    }
+    if(page_buttons[page-1] == undefined || page_buttons[page-1] == null) {
+        m, n = parseInt(m), parseInt(n);
+        createTable(m,n)
+        addButtons(starting_words);
+        addImages(starting_words);
+    }
+    document.getElementById('board').remove();
+    m, n = parseInt(m), parseInt(n);
+    createTable(m,n);
+    console.log(page_buttons[page-1],m,n);
+    addButtons(page_buttons[page-1],m,n);
+    addImages(page_buttons[page-1]);
+    updatePage(page);
+}
+
+function updatePage(num) {
+    document.getElementById('page').innerHTML = 'Page: ' + num;
 }
