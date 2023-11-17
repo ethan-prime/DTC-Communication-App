@@ -7,6 +7,11 @@ class Button {
     }
 }
 
+const CONVERSION = {
+    "idontknow": "i don't know",
+    "dontwant": "don't want"
+}
+
 let page = 1;
 let m, n, page_buttons;
 const LAST_PAGE = 5;
@@ -19,6 +24,11 @@ function playSound(sound) {
 }
 
 function createTable(m, n) {
+    try {
+        document.getElementById('board').remove();
+    } catch {
+        //pass
+    }
     let table = document.createElement("table");
     table.setAttribute('id','board');
     for(let i = 0; i < m; i++) {
@@ -38,17 +48,39 @@ function createTable(m, n) {
 function addButtons(buttonList, m, n) {  //buttonList = ["hello", "yes", "no", etc...]
     for (let i = 0; i < buttonList.length && i < m*n; i++) {
         word = buttonList[i].toLowerCase().replaceAll(' ','').replaceAll(',','').replaceAll("'",'');
+        if (word == "blank") {
+            let btn = document.createElement("input");
+            btn.setAttribute("type", "button");
+            btn.setAttribute("class", "comm-btn");
+            btn.setAttribute("id", "blank");
+            btn.setAttribute("value","");
+            row = Math.floor(i/n);
+            col = i % n;
+            // we assume that a button table has already been created !
+            let elem = document.getElementById("item-"+row+"."+col);
+            //console.log(elem);
+            elem.appendChild(btn);
+            continue;
+        }
         let btn = document.createElement("input");
         btn.setAttribute("type", "button");
         btn.setAttribute("class", "comm-btn");
         btn.setAttribute("id", word);
-        btn.setAttribute("value", buttonList[i]);
         row = Math.floor(i/n);
         col = i % n;
         // we assume that a button table has already been created !
         let elem = document.getElementById("item-"+row+"."+col);
         //console.log(elem);
+        let para = document.createElement('p');
+        para.setAttribute("id", word+"-para");
+        para.setAttribute("class", "buttonDesc")
+        if(CONVERSION[word]) {
+            para.innerHTML = CONVERSION[word];
+        } else {
+            para.innerHTML = word;
+        }
         elem.appendChild(btn);
+        elem.appendChild(para);
     }
     for (let i = 0; i < buttonList.length; i++) {
         //console.log(word);
@@ -64,6 +96,10 @@ function addButtons(buttonList, m, n) {  //buttonList = ["hello", "yes", "no", e
 function addImages(words) {
     for (let i = 0; i < words.length; i++) {
         let word = words[i].toLowerCase().replaceAll(' ','').replaceAll(',','').replaceAll("'",'');
+        if (word == "blank")
+        {
+            continue;
+        }
         //console.log(word);
         try {
             document.getElementById(word).style.backgroundImage = `url(static/images/${word}.png)`;
@@ -112,19 +148,19 @@ function pageBack() {
     } else {
         page--;
     }
-    if(page_buttons[page-1] == undefined || page_buttons[page-1] == null) {
+    if(page_buttons[page-1] == undefined || page_buttons[page-1] == null || page_buttons[page-1]) {
         m, n = parseInt(m), parseInt(n);
         createTable(m,n)
         addButtons(starting_words);
         addImages(starting_words);
+    } else {
+        document.getElementById('board').remove();
+        m, n = parseInt(m), parseInt(n);
+        createTable(m,n);
+        console.log(page_buttons[page-1],m,n);
+        addButtons(page_buttons[page-1],m,n);
+        addImages(page_buttons[page-1]);
     }
-    document.getElementById('board').remove();
-    m, n = parseInt(m), parseInt(n);
-    createTable(m,n);
-    console.log(page_buttons[page-1],m,n);
-    addButtons(page_buttons[page-1],m,n);
-    addImages(page_buttons[page-1]);
-    updatePage(page);
 }
 
 function pageForward() {
@@ -138,16 +174,12 @@ function pageForward() {
         createTable(m,n)
         addButtons(starting_words);
         addImages(starting_words);
+    } else {
+        document.getElementById('board').remove();
+        m, n = parseInt(m), parseInt(n);
+        createTable(m,n);
+        console.log(page_buttons[page-1],m,n);
+        addButtons(page_buttons[page-1],m,n);
+        addImages(page_buttons[page-1]);
     }
-    document.getElementById('board').remove();
-    m, n = parseInt(m), parseInt(n);
-    createTable(m,n);
-    console.log(page_buttons[page-1],m,n);
-    addButtons(page_buttons[page-1],m,n);
-    addImages(page_buttons[page-1]);
-    updatePage(page);
-}
-
-function updatePage(num) {
-    document.getElementById('page').innerHTML = 'Page: ' + num;
 }

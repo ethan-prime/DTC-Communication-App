@@ -9,6 +9,10 @@ API_KEY = ""
 
 starting_words = ["hello","you","please","thanks","happy","sad","angry","tired","bathroom","food","drink","music","walk","store","computer","yes","no","help","i dont know"]
 
+@app.route('/customize')
+def customize():
+    return render_template("url_main.html")
+
 @app.route('/')
 @app.route('/<url_params>')
 def home(url_params=""):
