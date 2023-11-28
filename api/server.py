@@ -35,10 +35,8 @@ def download_sounds(words):
         };
         r = requests.post("https://api.elevenlabs.io/v1/text-to-speech/21m00Tcm4TlvDq8ikWAM",json=body,headers=headers)
         filename = word.replace(' ','').replace(',','').replace("'",'') + ".mp3"
-        with open(f'static/audios/{filename}', "wb") as f:
+        with open(f'{os.getcwd()}/api/static/audios/{filename}', "wb") as f:
             f.write(r.content)
 
 if __name__ == '__main__':
     app.run()
-
-#ENCODE PROFILE DATA VIA URL!!!!!
